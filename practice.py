@@ -93,8 +93,9 @@ def get_sum_zero_pairs(numbers):
     num_pairs = []
     for num in numbers:
         for next_num in numbers:
-            if num + next_num == 0 and num_pairs.count(sorted([num, next_num])) == 0:
-                num_pairs.append(sorted([num, next_num]))
+            tupl = sorted((num, next_num))
+            if num + next_num == 0 and tupl not in num_pairs:
+                num_pairs.append(tupl)
 
     return num_pairs
 
