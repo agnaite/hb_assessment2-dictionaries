@@ -32,7 +32,7 @@ def without_duplicates(words):
         [2, 33333, 111111]
     """
 
-    return []
+    return list(set(words))
 
 
 def find_unique_common_items(items1, items2):
@@ -62,7 +62,7 @@ def find_unique_common_items(items1, items2):
         [2]
     """
 
-    return []
+    return list(set(items1) & set(items2))
 
 def get_sum_zero_pairs(numbers):
     """Given list of numbers, return list of pair summing to 0.
@@ -90,8 +90,13 @@ def get_sum_zero_pairs(numbers):
         >>> sort_pairs( get_sum_zero_pairs([1, 3, -1, 1, 1, 0]) )
         [[-1, 1], [0, 0]]
     """
+    num_pairs = []
+    for num in numbers:
+        for next_num in numbers:
+            if num + next_num == 0 and num_pairs.count(sorted([num, next_num])) == 0:
+                num_pairs.append(sorted([num, next_num]))
 
-    return []
+    return num_pairs
 
 
 def top_chars(phrase):
@@ -118,8 +123,23 @@ def top_chars(phrase):
     Do not count spaces, but count all other characters.
 
     """
+    letters = {}
+    sorted_letters = []
+    just_letters = []
 
-    return []
+    for char in phrase.replace(" ", ""):
+        letters[char] = letters.get(char, 0) + 1
+
+    for item in sorted(letters, key=letters.get, reverse=True):
+        sorted_letters.append((item, letters[item]))
+
+    max_count = sorted_letters[0][1]
+
+    for tupl in sorted_letters:
+        if tupl[1] == max_count:
+            just_letters.append(tupl[0])
+
+    return sorted(just_letters)
 
 #####################################################################
 # You can ignore everything below this.
