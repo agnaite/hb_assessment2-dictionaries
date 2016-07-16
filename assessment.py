@@ -188,21 +188,21 @@ def kids_game(names):
     a dictionary (with the super-fast lookup they provide) can help;
     good solutions here will definitely require a dictionary.
     """
-    last_letter = {}
-    first_word_last_letter = names[0][-1]
+    last_letters = {}
+    current_last_letter = names[0][-1]
     words_sorted = [names[0]]
 
     for word in names:
-        last_letter[word[-1]] = []
+        last_letters[word[-1]] = []
 
     for word in names:
         if word != names[0]:
-            last_letter[word[0]] = last_letter.get(word[0]) + [word]
+            last_letters[word[0]] = last_letters.get(word[0]) + [word]
 
-    while len(last_letter[first_word_last_letter]) != 0:
-        words_sorted.append(last_letter[first_word_last_letter][0])
-        last_letter[first_word_last_letter] = last_letter[first_word_last_letter][1:]
-        first_word_last_letter = words_sorted[-1][-1]
+    while not last_letters[current_last_letter] == []:
+        words_sorted.append(last_letters[current_last_letter][0])
+        last_letters[current_last_letter] = last_letters[current_last_letter][1:]
+        current_last_letter = words_sorted[-1][-1]
 
     return words_sorted
 #####################################################################
