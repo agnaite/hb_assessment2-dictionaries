@@ -90,12 +90,12 @@ def get_sum_zero_pairs(numbers):
         >>> sort_pairs( get_sum_zero_pairs([1, 3, -1, 1, 1, 0]) )
         [[-1, 1], [0, 0]]
     """
-    num_pairs = []
+    num_pairs = set()
     for num in numbers:
         for next_num in numbers:
             tupl = sorted((num, next_num))
-            if num + next_num == 0 and tupl not in num_pairs:
-                num_pairs.append(tupl)
+            if num + next_num == 0:
+                num_pairs.add(tuple(tupl))
 
     return num_pairs
 
